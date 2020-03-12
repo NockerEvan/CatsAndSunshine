@@ -22,6 +22,18 @@ public class CatFeeder {
         System.out.println("Please select one to feed the cat");
     }
 
+    private void isChosenFoodAvailable() throws IOException  {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        chosenFood = reader.readLine().toLowerCase();
+
+        for(String s:food) {
+            if(chosenFood.equals(s.toLowerCase())){
+                isPresent=true;
+                break;
+            }
+        }
+    }
+
     private void printFoodReaction() throws IOException {
         isChosenFoodAvailable();
         if (isPresent) {
@@ -33,18 +45,6 @@ public class CatFeeder {
             }
         } else {
             System.out.println("There is no such food available");
-        }
-    }
-
-    private void isChosenFoodAvailable() throws IOException  {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        chosenFood = reader.readLine().toLowerCase();
-
-        for(String s:food) {
-            if(chosenFood.equals(s.toLowerCase())){
-                isPresent=true;
-                break;
-            }
         }
     }
 
