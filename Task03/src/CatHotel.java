@@ -19,21 +19,32 @@ public class CatHotel {
         this.cats = cats;
     }
 
-    public void bringACat(String newCat) {
+    private void bringACat(String newCat) {
         cats.add(newCat);
     }
 
-    public void takeACat(int index) {
+    private void takeACat(int index) {
         cats.remove(index);
     }
 
-    public void takeACat(String catName) {
+    private void takeACat(String catName) {
         cats.remove(catName);
     }
 
-    public void printAllCats() {
+    private void printAllCats() {
         for (String s: cats) {
             System.out.print(s + ", ");
         }
+    }
+
+    private void printInstructions() {
+        System.out.println("Welcome to our cat hotel 'Pet Paradise'!");
+        System.out.println("Here our current guests:");
+        printAllCats();
+        System.out.println("You can:" + "\n" +
+                "1 - Bring a new cat" + "\n" +
+                "2 - Take a cat home (chose by number in a row)" + "\n" +
+                "3 - Take a cat home (chose by name)" + "\n" +
+                "4 - Leave the hotel");
     }
 }
