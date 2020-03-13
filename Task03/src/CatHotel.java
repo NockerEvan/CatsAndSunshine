@@ -50,9 +50,8 @@ public class CatHotel {
         printAllCats();
         System.out.println("You can:" + "\n" +
                 "1 - Bring a new cat" + "\n" +
-                "2 - Take a cat home (chose by number in a row)" + "\n" +
-                "3 - Take a cat home (chose by name)" + "\n" +
-                "4 - Leave the hotel");
+                "2 - Take a cat home (chose by number or by name)" + "\n" +
+                "3 - Leave the hotel");
     }
 
     private void runHotel() {
@@ -61,18 +60,18 @@ public class CatHotel {
         while (true) {
             try {
                 choice = Integer.parseInt(reader.readLine());
-                if ((choice > 0) && (choice < 5)) {
+                if ((choice > 0) && (choice < 3)) {
                     hotelLogic(choice);
-                } else {
-                    System.out.println("You must type in a number between 1 and 4 inclusive");;
+                } else if (choice == 3) {
+                    System.out.println("Have a nice day and return to our hotel shortly!");
+                    break;
                 }
             } catch (IOException e) {
-                System.out.println("You must type in a number between 1 and 4 inclusive");;
+                System.out.println("You must type in a number between 1 and 3 inclusive");;
             }
         }
     }
 
-    //TODO clean up the logic method
     private void hotelLogic(int choice) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if (choice == 1) {
@@ -84,15 +83,9 @@ public class CatHotel {
                 int catNumber = Integer.parseInt(reader.readLine());
                 takeACat(catNumber);
             } catch (IOException e) {
-                System.out.println("You must type in a number between 1 and " + cats.size() + " inclusive");
+                String catName = reader.readLine();
+                takeACat(catName);
             }
-        } else if (choice == 3) {
-            String catToTake = reader.readLine();
-            takeACat(catToTake);
-        } else if (choice == 4) {
-
-        } else {
-
         }
         reader.close();
     }
