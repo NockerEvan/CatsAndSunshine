@@ -30,18 +30,36 @@ public class CatHotel {
         if (index < cats.size()) {
             cats.remove(index - 1);
         } else {
-
+            System.out.println("There is no cat with this number." + "\n" +
+                    "Please choose the number between 1 and " + cats.size());
         }
     }
 
     private void takeACat(String catName) {
-        cats.remove(catName);
+        if (isPresent(catName)) {
+            cats.remove(catName);
+        } else {
+            System.out.println("There is no such cat in the hotel.");
+        }
     }
 
     private void printAllCats() {
-        for (String s: cats) {
-            System.out.print(s + ", ");
+        int size = cats.size();
+        for (int i = 0; i < size; i++) {
+            System.out.print((i+1) + "-" + cats.get(i) + " ");
         }
+        System.out.println();
+    }
+
+    private boolean isPresent(String catName) {
+        boolean isPresent = false;
+        for (String s: cats) {
+            if (s.toLowerCase().equals(catName.toLowerCase())) {
+                isPresent = true;
+                break;
+            }
+        }
+        return isPresent;
     }
 
     private void printInstructions() {
@@ -52,24 +70,7 @@ public class CatHotel {
                 "1 - Bring a new cat" + "\n" +
                 "2 - Take a cat home (chose by number or by name)" + "\n" +
                 "3 - Leave the hotel");
-    }
-
-    private void runHotel() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int choice;
-        while (true) {
-            try {
-                choice = Integer.parseInt(reader.readLine());
-                if ((choice > 0) && (choice < 3)) {
-                    hotelLogic(choice);
-                } else if (choice == 3) {
-                    System.out.println("Have a nice day and return to our hotel shortly!");
-                    break;
-                }
-            } catch (IOException e) {
-                System.out.println("You must type in a number between 1 and 3 inclusive");;
-            }
-        }
+        System.out.println("Type a number to choose an option");
     }
 
     private void hotelLogic(int choice) throws IOException {
@@ -82,11 +83,33 @@ public class CatHotel {
             try {
                 int catNumber = Integer.parseInt(reader.readLine());
                 takeACat(catNumber);
-            } catch (IOException e) {
+            } catch (NumberFormatException e) {
                 String catName = reader.readLine();
                 takeACat(catName);
             }
         }
         reader.close();
+    }
+
+    public void runHotel() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int choice;
+        printInstructions();
+        while (true) {
+            try {
+                choice = Integer.parseInt(reader.readLine());
+                if ((choice > 0) && (choice < 3)) {
+                    hotelLogic(choice);
+                    System.out.println("New cat hotel list:");
+                    printAllCats();
+                    break;
+                } else if (choice == 3) {
+                    System.out.println("Have a nice day and return to our hotel shortly!");
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("You must type in a number between 1 and 3 inclusive");
+            }
+        }
     }
 }
