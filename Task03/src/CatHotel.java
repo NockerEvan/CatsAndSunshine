@@ -27,7 +27,7 @@ public class CatHotel {
     }
 
     private void takeACat(int index) {
-        if (index < cats.size()) {
+        if ((index < cats.size()) && index > 0) {
             System.out.println("You've taken " + cats.get(index-1));
             cats.remove(index - 1);
         } else {
