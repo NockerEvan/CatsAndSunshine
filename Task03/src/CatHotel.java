@@ -28,15 +28,16 @@ public class CatHotel {
 
     private void takeACat(int index) {
         if (index < cats.size()) {
+            System.out.println("You've taken " + cats.get(index-1));
             cats.remove(index - 1);
         } else {
-            System.out.println("There is no cat with this number." + "\n" +
-                    "Please choose the number between 1 and " + cats.size());
+            System.out.println("There is no cat with this number.");
         }
     }
 
     private void takeACat(String catName) {
         if (isPresent(catName)) {
+            System.out.println("You've taken " + catName);
             cats.remove(catName);
         } else {
             System.out.println("There is no such cat in the hotel.");
@@ -80,15 +81,15 @@ public class CatHotel {
             String newCat = reader.readLine();
             bringACat(newCat);
         } else if (choice == 2) {
+            System.out.println("Choose a cat to take");
+            String input = reader.readLine();
             try {
-                int catNumber = Integer.parseInt(reader.readLine());
+                int catNumber = Integer.parseInt(input);
                 takeACat(catNumber);
             } catch (NumberFormatException e) {
-                String catName = reader.readLine();
-                takeACat(catName);
+                takeACat(input);
             }
         }
-        reader.close();
     }
 
     public void runHotel() throws IOException {
@@ -102,7 +103,7 @@ public class CatHotel {
                     hotelLogic(choice);
                     System.out.println("New cat hotel list:");
                     printAllCats();
-                    break;
+                    System.out.println("\n" + "Choose an option");
                 } else if (choice == 3) {
                     System.out.println("Have a nice day and return to our hotel shortly!");
                     break;
