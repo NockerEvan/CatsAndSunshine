@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Создадим список из 10 котиков, причем в списке есть два Барсика и три Мурки.
  *
@@ -10,4 +12,29 @@
  */
 
 public class CatList {
+    private ArrayList<String> catList;
+
+    private int countCatsWithName(String name) {
+        int count = 0;
+        return count;
+    }
+
+    private void printCats(ArrayList<String> catList) {
+    }
+
+    private void sortCats() {
+    }
+
+    public void catsMeow() {
+    }
+
+    public void catsAttention() {
+    }
+
+    public void catsWithName() {
+    }
+
+    public CatList(ArrayList<String> catList) {
+        this.catList = catList;
+    }
 }
